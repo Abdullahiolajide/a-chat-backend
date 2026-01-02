@@ -7,6 +7,7 @@ import express from 'express';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import passport from './config/passport';
+import cors, { CorsOptions } from 'cors'
 
 dotenv.config();
 
@@ -19,6 +20,26 @@ if (!mongoUri) {
 
 // Middleware setup
 app.use(express.json());
+
+const allowedOrigins: string[] = [
+  "http://localhost:5173", 
+];
+
+const corsOptions: CorsOptions = {
+  origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
+    // !origin allows server-to-server requests or tools like Postman
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+
+app.use(cors(corsOptions));
 
 // Session configuration
 app.use(

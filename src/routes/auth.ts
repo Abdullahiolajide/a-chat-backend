@@ -8,8 +8,8 @@ router.get('/me', getMe)
 router.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
 
 router.get("/google/callback", passport.authenticate("google", { failureRedirect: "/login" }), googleCallback);
-router.use(requireAuth)
 router.get("/logout", googleLogout);
+router.use(requireAuth)
 
 
 export default router

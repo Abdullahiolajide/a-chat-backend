@@ -10,7 +10,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "start": "node dist/server.js",
-    "dev": "nodemon --watch 'src/**/*.ts' --exec ts-node src/server.ts",
+    "dev": "nodemon -e ts --watch src --exec ts-node src/server.ts",
     "lint": "eslint 'src/**/*.ts'"
   },
   "dependencies": {
@@ -19,6 +19,7 @@
     "@types/node": "^25.0.3",
     "bcrypt": "^6.0.0",
     "connect-mongo": "^6.0.0",
+    "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "dotenv": "^17.2.3",
     "eslint": "^9.39.2",
@@ -33,6 +34,7 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",
+    "@types/cors": "^2.8.19",
     "@types/passport": "^1.0.17",
     "@types/passport-google-oauth20": "^2.0.17",
     "ts-node": "^10.9.2",
